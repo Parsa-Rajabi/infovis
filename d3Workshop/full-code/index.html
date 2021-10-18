@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>D3 Workshop Fall 2021</title>
+
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <script type="text/javascript" src="jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="d3.js"></script>
+    <script type="text/javascript" src="main.js"></script>
+    <script type="text/javascript" src="flower.js"></script>
+    <script type="text/javascript" src="interactive_flower.js"></script>
+</head>
+<body>
+    <div class="content">
+        <h1>D3 Workshop Fall 2021</h1>
+        <span class="caption">By Bon Adriel Aseniero | bon.aseniero@autodesk.com</span>
+    </div>
+    <br>
+    <div class="vis">
+        <h2>Part 1: Introduction</h2>
+        <div class="center">
+            <svg class="small-vis" id="vis1">
+                <rect x="10" y="10" width="25" height="100"></rect>
+                <rect x="50" y="50" width="100" height="100"></rect>
+                <circle cx="215" cy="100" r="55"></circle>
+                <line x1="10" y1="200" x2="490" y2="200"
+                      style="stroke:black; stroke-width:2"></line>
+                <polyline points="350,10 400,60 300,110 400,160 350,210"
+                      style="fill:none; stroke:black; stroke-width:2"></polyline>
+            </svg>
+            <svg class="small-vis" id="vis2"></svg>
+            <svg class="small-vis" id="vis3"></svg>
+            <svg class="small-vis" id="vis4"></svg>
+        </div>
+    </div>
+    <br>
+    <div class="vis">
+        <h2>Part 2: Drawing Data</h2>
+        <svg class="large-vis" id="vis5"></svg>
+    </div>
+    <br>
+    <div class="vis">
+        <h2>Part 3: Interaction</h2>
+        <svg class="large-vis" id="vis6"></svg>
+    </div>
+    <br>
+</body>
+</html>
