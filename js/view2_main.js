@@ -48,10 +48,11 @@ const TIME = "TIME",
     purple = "#911eb4";
 
 
-function missingData(chartID, gas){
+function missingData(chartID, gas, colour) {
     console.log("Not enough data for " + gas)
-    // document.getElementById(chartID).style.display = "none"
-    // document.getElementById(chartID + "-text").textContent = "Missing data"
+    document.getElementById(chartID).style.display = "none"
+    document.getElementById(chartID + "-missingText").textContent = "This air station does not have any data for " + gas
+    document.getElementById(chartID + "-missingText").style.color = colour
 }
 
 function draw(view1_region, view1_station) {
@@ -77,8 +78,8 @@ function draw(view1_region, view1_station) {
         if(d.length > 0) {
             chart(d, "chart1", red)
             console.log("Loading CO")
-        }else{
-            missingData("chart1","CO")
+        } else {
+            missingData("chart1", "CO", red)
         }
 
     })
@@ -102,8 +103,8 @@ function draw(view1_region, view1_station) {
             d.columns = [DATE.toLowerCase(), O3]
             chart(d, "chart2", blue)
             console.log("Loading O3")
-        } else{
-            missingData("chart2","O3")
+        } else {
+            missingData("chart2", "O3", blue)
         }
     })
 
@@ -125,8 +126,8 @@ function draw(view1_region, view1_station) {
         if(d.length > 0) {
             chart(d, "chart3", green)
             console.log("Loading SO2")
-        }else{
-            missingData("chart3","SO2")
+        } else {
+            missingData("chart3", "SO2", green)
         }
     })
 
@@ -170,8 +171,8 @@ function draw(view1_region, view1_station) {
         if(d.length > 0) {
             chart(d, "chart5", black)
             console.log("Loading NO2")
-        }else{
-            missingData("chart5","NO2")
+        } else {
+            missingData("chart5", "NO2", black)
         }
     })
 
@@ -193,8 +194,8 @@ function draw(view1_region, view1_station) {
         if(d.length > 0) {
             chart(d, "chart6", purple)
             console.log("Loading NOx")
-        }else{
-            missingData("chart6","NOx")
+        } else {
+            missingData("chart6", "NOx", purple)
         }
     })
 }
