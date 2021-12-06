@@ -1,18 +1,4 @@
-function chart(data, name, colour) {
-
-    document.getElementById("chart1-text").style.fill = red
-    document.getElementById("chart2-text").style.fill = blue
-    document.getElementById("chart3-text").style.fill = green
-    document.getElementById("chart4-text").style.fill = cyan
-    document.getElementById("chart5-text").style.fill = black
-    document.getElementById("chart6-text").style.fill = purple
-
-    document.getElementById("chart1-text").textContent = "CO"
-    document.getElementById("chart2-text").textContent = "O3"
-    document.getElementById("chart3-text").textContent = "SO2"
-    document.getElementById("chart4-text").textContent = "NO"
-    document.getElementById("chart5-text").textContent = "NO2"
-    document.getElementById("chart6-text").textContent = "NOx"
+function chart(data, name, gasName, colour) {
 
     // parse time based on date format
     var parseTime = d3.timeParse("%Y-%m-%d"),
@@ -26,7 +12,7 @@ function chart(data, name, colour) {
     })
 
     var svgElement = d3.select("#" + name),
-        margin = {top: 15, right: 35, bottom: 15, left: 35},
+        margin = {top: 25, right: 35, bottom: 25, left: 60},
         width = +svgElement.attr("width") - margin.left - margin.right,
         height = +svgElement.attr("height") - margin.top - margin.bottom;
 
@@ -52,6 +38,27 @@ function chart(data, name, colour) {
     svgElement.append("g")
         .attr("class", "y-axis")
         .attr("transform", "translate(" + margin.left + ",0)");
+
+    // text label for the x axis
+    svgElement.append("text")
+        .attr("transform", "translate(" + (width/2) + " ," + (height + margin.top - 5) + ")")
+        .style("text-anchor", "middle")
+        .text("Date (Jan 2019 - Dec 2020)");
+
+    // text label for the y axis
+    svgElement.append("text")
+        .attr("transform", "translate(" + 22 + "," + (height / 2) + ")rotate(-90)")
+        .attr("text-anchor", "middle")
+        .text("Amount of Gas Emitted (ppb)");
+
+    // text label for the title
+    svgElement.append("text")
+        .attr("x", width/10)
+        .attr("y", -height/2 + margin.top + margin.bottom + 100)
+        .attr("text-anchor", "middle")
+        .style("font-size", "16px")
+        .style("fill", colour)
+        .text(gasName);
 
     var hover = svgElement.append("g")
         .attr("class", "hover")
