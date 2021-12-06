@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+
+        .y-axis line {
+            opacity: .2;
+        }
+
+        svg {
+            padding: 10px;
+        }
+
+        .y-axis path {
+            /*display: none;*/
+        }
+
+        .line {
+            fill: none;
+            stroke-width: 1.5px;
+            opacity: .75;
+        }
+
+        .interaction {
+            fill: none;
+            pointer-events: all;
+        }
+
+        .lineHoverText {
+            text-shadow: -2px -2px 0 #fff,
+            2px -2px 0 #fff,
+            -2px 2px 0 #fff,
+            2px 2px 0 #fff;
+        }
+
+        .hoverCircle {
+            opacity: .75;
+        }
+
+    </style>
+    <title>BC Gas Emission</title>
+</head>
+
+<body>
+
+<p id="displayRegion"></p>
+<p id="displayStation"></p>
+
+<svg id="chart1" width="1900" height="320">
+    <text id="chart1-text" x="0" y="15"></text>
+</svg>
+<svg id="chart2" width="1900" height="320">
+    <text id="chart2-text" x="0" y="15"></text>
+</svg>
+
+<svg id="chart3" width="1900" height="320">
+    <text id="chart3-text" x="0" y="15"></text>
+</svg>
+<svg id="chart4" width="1900" height="320">
+    <text id="chart4-text" x="0" y="15" fill="red"></text>
+</svg>
+<svg id="chart5" width="1900" height="320">
+    <text id="chart5-text" x="0" y="15" fill="red"></text>
+</svg>
+<svg id="chart6" width="1900" height="320">
+    <text id="chart6-text" x="0" y="15" fill="red"></text>
+</svg>
+
+<script type='text/javascript'>
+    window.onload = function () {
+        var selectRegion = document.getElementById("selectRegion");
+        var selectStation = document.getElementById("selectStation");
+        var selectedItem = document.getElementById("selectedItem");
+        var displayRegion = document.getElementById("displayRegion");
+        var displayStation = document.getElementById("displayStation");
+    }
+</script>
+
+<script src="lib/d3.v5.min.js"></script>
+<script type="text/javascript" src="js/view2_main.js"></script>
+<script type="text/javascript" src="js/view2_LineChart.js"></script>
+
+</body>
+</html>
