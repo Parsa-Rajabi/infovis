@@ -28,14 +28,15 @@ const region = localStorage.getItem("view1_region");
       var tooltip = d3.select(".canva")
         .append("div").attr("class","tooltip").style("opacity",0);
   
-  d3.csv('data/view3.csv')
-
-
-      .then(data => {
-        
+  d3.csv('data/view3.csv').then(data => {
+          console.log("data in CSV")
+          console.log(data)
         data = data.filter(function(d,i){
                 
-            return (d.REGION == region && d.STATION_NAME==station && d.DATE == date);
+            if (d.REGION == region && d.STATION_NAME==station && d.DATE == date){
+
+                return d;
+            }
             // return d.REGION == region;
         })
           data.forEach(d=>{
