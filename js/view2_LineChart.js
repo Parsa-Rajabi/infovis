@@ -3,7 +3,7 @@ function chart(data, name, gasName, colour) {
     // parse time based on date format
     var parseTime = d3.timeParse("%Y-%m-%d"),
         formatDate = d3.timeFormat("%b %d, %Y"),
-        passDateToView3 = d3.timeFormat("%d/%m/%Y"), //day/month/year
+        passDateToView3 = d3.timeFormat("%Y-%m-%d"), //day/month/year
         bisectDate = d3.bisector(d => d.date).left;
 
     data.forEach(function (d) {
