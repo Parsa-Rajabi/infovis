@@ -40,12 +40,19 @@ const TIME = "TIME",
     NO = "NO",
     NO2 = "NO2",
     NOX = "NOX",
+    CO_full = "Carbon Monoxide (CO)",
+    O3_full = "Ground-level Ozone (O3)",
+    SO2_full = "Sulfur Dioxide (SO2)",
+    NO_full = "Nitric Oxide (NO)",
+    NO2_full = "Nitrogen Dioxide (NO2)",
+    NOX_full = "Nitrogen Oxides (NOx)",
     red = "#e41a1c",
-    blue = "#4363d8",
-    cyan = "#42d4f4",
-    green = "#3cb44b",
+    orange = "#FFA500",
+    gray = "#808080",
+    brown = "#852415",
+    green = "#228B22",
     black = "#000000",
-    purple = "#911eb4";
+    purple = "#800080";
 
 
 function missingData(chartID, gas, colour) {
@@ -60,7 +67,7 @@ function draw(view1_region, view1_station) {
     console.log("selected station " + view1_station)
 
     d3.csv("data/1_CO_12.csv", function (d) {
-        if (d[REGION] === view1_region && d[STATION_NAME_FULL].toLowerCase() === view1_station.toLowerCase()) {
+        if (d[REGION] === view1_region && d[STATION_NAME].toLowerCase() === view1_station.toLowerCase()) {
             return d
         }
     }).then(d => {
@@ -76,16 +83,16 @@ function draw(view1_region, view1_station) {
         })
         d.columns = [DATE.toLowerCase(), CO]
         if (d.length > 0) {
-            chart(d, "chart1", "Carbon Monoxide (CO)", red)
+            chart(d, "chart1", CO_full, orange)
             console.log("Loading CO")
         } else {
-            missingData("chart1", "CO", red)
+            missingData("chart1", CO_full, red)
         }
 
     })
 
     d3.csv("data/2_O3_12.csv", function (d) {
-        if (d[REGION] === view1_region && d[STATION_NAME_FULL].toLowerCase() === view1_station.toLowerCase()) {
+        if (d[REGION] === view1_region && d[STATION_NAME].toLowerCase() === view1_station.toLowerCase()) {
             return d
         }
     }).then(d => {
@@ -101,15 +108,15 @@ function draw(view1_region, view1_station) {
                 delete d[DATE];
             })
             d.columns = [DATE.toLowerCase(), O3]
-            chart(d, "chart2", "Ground-level Ozone (O3)", blue)
+            chart(d, "chart2", O3_full, gray)
             console.log("Loading O3")
         } else {
-            missingData("chart2", "O3", blue)
+            missingData("chart2", O3_full, red)
         }
     })
 
     d3.csv("data/3_SO2_12.csv", function (d) {
-        if (d[REGION] === view1_region && d[STATION_NAME_FULL].toLowerCase() === view1_station.toLowerCase()) {
+        if (d[REGION] === view1_region && d[STATION_NAME].toLowerCase() === view1_station.toLowerCase()) {
             return d
         }
     }).then(d => {
@@ -124,15 +131,15 @@ function draw(view1_region, view1_station) {
         })
         d.columns = [DATE.toLowerCase(), SO2]
         if (d.length > 0) {
-            chart(d, "chart3", "Sulfur Dioxide (SO2)", green)
+            chart(d, "chart3", SO2_full, brown)
             console.log("Loading SO2")
         } else {
-            missingData("chart3", "SO2", green)
+            missingData("chart3", SO2_full, red)
         }
     })
 
     d3.csv("data/4_NO_12.csv", function (d) {
-        if (d[REGION] === view1_region && d[STATION_NAME_FULL].toLowerCase() === view1_station.toLowerCase()) {
+        if (d[REGION] === view1_region && d[STATION_NAME].toLowerCase() === view1_station.toLowerCase()) {
             return d
         }
     }).then(d => {
@@ -147,14 +154,14 @@ function draw(view1_region, view1_station) {
         })
         d.columns = [DATE.toLowerCase(), NO]
         if (d.length > 0) {
-            chart(d, "chart4", "Nitric Oxide (NO)", cyan)
+            chart(d, "chart4",NO_full, purple)
         } else {
-            missingData("chart4", "NO", cyan)
+            missingData("chart4", NO_full, red)
         }
     })
 
     d3.csv("data/5_NO2.csv", function (d) {
-        if (d[REGION] === view1_region && d[STATION_NAME_FULL].toLowerCase() === view1_station.toLowerCase()) {
+        if (d[REGION] === view1_region && d[STATION_NAME].toLowerCase() === view1_station.toLowerCase()) {
             return d
         }
     }).then(d => {
@@ -169,15 +176,15 @@ function draw(view1_region, view1_station) {
         })
         d.columns = [DATE.toLowerCase(), NO2]
         if (d.length > 0) {
-            chart(d, "chart5", "Nitrogen Dioxide (NO2)", black)
+            chart(d, "chart5", NO2_full, green)
             console.log("Loading NO2")
         } else {
-            missingData("chart5", "NO2", black)
+            missingData("chart5", NO2_full, red)
         }
     })
 
     d3.csv("data/6_NOx_12.csv", function (d) {
-        if (d[REGION] === view1_region && d[STATION_NAME_FULL].toLowerCase() === view1_station.toLowerCase()) {
+        if (d[REGION] === view1_region && d[STATION_NAME].toLowerCase() === view1_station.toLowerCase()) {
             return d
         }
     }).then(d => {
@@ -192,10 +199,10 @@ function draw(view1_region, view1_station) {
         })
         d.columns = [DATE.toLowerCase(), NOX]
         if (d.length > 0) {
-            chart(d, "chart6", "Nitrogen Oxides (NOx)", purple)
+            chart(d, "chart6", NOX_full, black)
             console.log("Loading NOx")
         } else {
-            missingData("chart6", "NOx", purple)
+            missingData("chart6", NOX_full, red)
         }
     })
 }
