@@ -13,7 +13,7 @@ function chart(data, name, gasName, colour) {
 
     var svgElement = d3.select("#" + name),
         margin = {top: 25, right: 35, bottom: 25, left: 60},
-        width = +svgElement.attr("width") - margin.left - margin.right,
+        width = +window.innerWidth - margin.left - margin.right,
         height = +svgElement.attr("height") - margin.top - margin.bottom;
 
     var xAxis = d3.scaleTime()
