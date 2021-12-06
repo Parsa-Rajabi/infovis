@@ -219,11 +219,8 @@ class SunBurst{
     // return vis.svg.node();
     console.log(vis.root);
     vis.canvas = d3.select(vis.config.parentElement).node().appendChild(vis.svg.node());
-
-
   
     }
-
     
 
     renderVis() {
