@@ -6,7 +6,7 @@ const region = localStorage.getItem("view1_region");
       console.log(date,'FROM VIEW 3');
       console.log(station,'FROM VIEW 3');
       console.log(region,'FROM VIEW 3');
-      var width = 900, height = 900, sizeDivisor = 900, nodePadding = 2.5;
+      var width = 700, height = 700, sizeDivisor = 900, nodePadding = 2.5;
 
       var svg = d3.select(".bubble")
           .append("svg")
@@ -47,7 +47,7 @@ const region = localStorage.getItem("view1_region");
 
             console.log(data)
           
-          const x= d3.scaleLinear().domain([0,d3.max(data,d=>d.ROUNDED_VALUE)]).range([0,200]);
+          const x= d3.scaleLinear().domain([0,d3.max(data,d=>d.ROUNDED_VALUE)]).range([0,150]);
             console.log(d3.max(data,d=>d.ROUNDED_VALUE)/10);
           data = data.sort(function(a,b){ return b.size - a.size; });
           simulation
@@ -55,7 +55,7 @@ const region = localStorage.getItem("view1_region");
           .force("collide", d3.forceCollide().strength(.5).radius(function(d){ 
             
             if (d.PARAMETER=="CO"){
-              return x(d.ROUNDED_VALUE)/2 + nodePadding; 
+              return x(d.ROUNDED_VALUE/3)/2 + nodePadding; 
             }else{
               return x(d.ROUNDED_VALUE) + nodePadding; 
             }
@@ -79,7 +79,7 @@ const region = localStorage.getItem("view1_region");
             .attr("r", function(d,i,n) { 
               
               if (d.PARAMETER=="CO"){
-                return x(d.ROUNDED_VALUE)/2;
+                return x(d.ROUNDED_VALUE/3)/2;
               }else{
                 return x(d.ROUNDED_VALUE);
               }
@@ -102,7 +102,7 @@ const region = localStorage.getItem("view1_region");
           });
   
       function dragstarted(event,d) {
-        if (!d3.active) simulation.alphaTarget(.03).restart();
+        if (!d3.active) simulation.alphaTarget(.30).restart();
         d.fx = d.x;
         d.fy = d.y;
       }
@@ -113,7 +113,7 @@ const region = localStorage.getItem("view1_region");
       }
   
       function dragended(event,d) {
-        if (!event.active) simulation.alphaTarget(.03);
+        if (!event.active) simulation.alphaTarget(.30);
         d.fx = null;
         d.fy = null;
       }
