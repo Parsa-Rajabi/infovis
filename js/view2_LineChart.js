@@ -41,7 +41,7 @@ function chart(data, name, gasName, colour) {
 
     // text label for the x axis
     svgElement.append("text")
-        .attr("transform", "translate(" + (width/2) + " ," + (height + margin.top - 5) + ")")
+        .attr("transform", "translate(" + (width/2) + " ," + (height + margin.top - 17) + ")")
         .style("text-anchor", "middle")
         .text("Date (Jan 2019 - Dec 2020)");
 
