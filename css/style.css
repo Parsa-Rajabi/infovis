@@ -32,7 +32,7 @@ svg {
     opacity: .75;
 
 }
-div.tooltip{
+/* div.tooltip{
     position: absolute;
     text-align: left;
     width: 100px;
@@ -44,7 +44,21 @@ div.tooltip{
     border: 0px;
     border-radius: 5px;
     pointer-events: none;
+} */
+
+div.tooltip{
+    position: absolute;
+    text-align: left;
+    width: 80px;
+    height: 100px;
+    padding: 2px;
+    font: 12px Helvetica, sans-serif;
+    background: rgb(222, 226, 228);
+    border: 1px;
+    border-radius: 5px;
+    pointer-events: none;
 }
+
 
 
 
