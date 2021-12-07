@@ -1,6 +1,8 @@
+//Partial Credit to: https://www.d3indepth.com/force-layout/
+//Partial Credit to: https://www.d3-graph-gallery.com/graph/circularpacking_group.html
 const date = localStorage.getItem("view2_date");
 const date_title = localStorage.getItem("view2_date_title");
-const station = localStorage.getItem("view1_station");
+const station = localStorage. getItem("view1_station");
 const region = localStorage.getItem("view1_region");
 
 MARGIN = { LEFT: 60, RIGHT: 30, TOP: 280, BOTTOM: 100 };
@@ -25,11 +27,9 @@ window.onload = function () {
   if (station && region) {
       displayRegion.textContent = "Region [" + region.slice(5) + "]"
       displayStation.textContent = "Air Station [" + station + "]"
-      // draw(region, station)
   } else if (!region && station) {
       displayRegion.textContent = getKeyByValue(BC, station)
       displayStation.textContent = station
-      // draw(getKeyByValue(BC, station), station)
   }
 }
 
@@ -47,30 +47,23 @@ var simulation = d3.forceSimulation()
   .force("charge", d3.forceManyBody().strength(1)) 
   .force("collide", d3.forceCollide().strength(.1).radius(30).iterations(1));
 
-
 var tooltip = d3.select("body")
   .append("div").attr("class", "tooltipbubble").style("opacity", 0);
 
-
 var x = d3.scaleSqrt().range([6, 45]);
-
 
 d3.csv('data/view3.csv').
   then(data => {
 
     data = data.filter(function (d, i) {
-
       if (d.REGION == region && d.STATION_NAME == station && d.DATE == date) {
-
         return d;
       }
 
     })
     d3.select('#loading').style("display", "none");
     data.forEach(d => {
-
       d.ROUNDED_VALUE = Number(d.ROUNDED_VALUE);
-
     })
 
     x.domain(d3.extent(data, d => d.ROUNDED_VALUE));
