@@ -9,18 +9,31 @@
 
 <body>
 
-<button onclick="window.location.href='view1.html'">Back</button>
-<button><a href="view1.html" target="_blank" rel="noopener noreferrer">Compare</a></button>
+<div class="flex-container">
+    <button class="btn" onclick="window.location.href='view1.html'">Back</button>
+    <h1>Amount of Gas Emitted over 2019-2020</h1>
+    <a class="btn" style="text-decoration: none; padding-top: 25px" href="view1.html" target="_blank"
+       rel="noopener noreferrer">Compare</a>
+</div>
 
-<p id="displayRegion"></p>
-<p id="displayStation"></p>
+<div class="flex-container-center">
+    <h2 class="instructions">Use your mouse to hover over graphs and left-click to select a date. Use the back button to
+        go back and the compare button to compare another region/station. </h2>
+</div>
 
-<p id="chart1-missingText"></p>
-<p id="chart2-missingText"></p>
-<p id="chart3-missingText"></p>
-<p id="chart4-missingText"></p>
-<p id="chart5-missingText"></p>
-<p id="chart6-missingText"></p>
+<div class="flex-container-center">
+    <h3 id="displayRegion"></h3>
+    <h3 id="displayStation"></h3>
+</div>
+
+<div class="missingTextContainer">
+    <p class="missingTextItem" id="chart1-missingText"></p>
+    <p class="missingTextItem" id="chart2-missingText"></p>
+    <p class="missingTextItem" id="chart3-missingText"></p>
+    <p class="missingTextItem" id="chart4-missingText"></p>
+    <p class="missingTextItem" id="chart5-missingText"></p>
+    <p class="missingTextItem" id="chart6-missingText"></p>
+</div>
 
 <svg id="chart1" width="1900" height="320">
     <text id="chart1-text" x="15" y="10"></text>
