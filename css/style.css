@@ -21,6 +21,54 @@ svg {
     pointer-events: all;
 }
 
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 10%;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+.flex-container-center {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.instructions {
+    font-size: 15px;
+    font-weight: normal;
+}
+
+
+.missingTextContainer {
+    text-align: center;
+}
+
+.missingTextItem {
+    margin: auto;
+    padding: 3px;
+}
+
+.btn {
+    display: inline-block;
+    outline: 0;
+    border: 0;
+    cursor: pointer;
+    background: #000000;
+    color: #FFFFFF;
+    border-radius: 8px;
+    padding: 14px 24px 16px;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1;
+    transition: transform 200ms, background 200ms;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+
 .datePickerText {
     font-weight: bold;
     fill: red;
@@ -30,7 +78,7 @@ svg {
     2px 2px 0 #fff;
 }
 
-div.tooltip{
+div.tooltip {
     position: absolute;
     text-align: left;
     width: 100px;
@@ -38,15 +86,14 @@ div.tooltip{
     padding: 2px;
     font: 12px Helvetica, sans-serif;
     color: white;
-    background: rgb(44,44,61);
+    background: rgb(44, 44, 61);
     border: 0px;
     border-radius: 5px;
     pointer-events: none;
 }
 
 
-
-body{
+body {
     font-size: 14px;
     font-family: 'Lato', 'sans-serif';
     /* background-color: rgb(44,44,61); */
@@ -57,4 +104,4 @@ body{
     margin-top: 10px;
     margin-left: 15px;
     /* outline: 1px solid #ccc; */
-  }
+}
