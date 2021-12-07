@@ -1,17 +1,24 @@
 const date = localStorage.getItem("view2_date");
+const date_title = localStorage.getItem("view2_date_title");
 const station = localStorage.getItem("view1_station");
 const region = localStorage.getItem("view1_region");
 // console.log(date,'FROM VIEW 3');
 // console.log(station,'FROM VIEW 3');
 // console.log(region,'FROM VIEW 3');
 MARGIN = { LEFT: 60, RIGHT: 30, TOP: 280, BOTTOM: 100 };
-const width = 900 - MARGIN.RIGHT - MARGIN.LEFT
-const height = 900 - MARGIN.TOP - MARGIN.BOTTOM
+const width = 1200 - MARGIN.RIGHT - MARGIN.LEFT
+const height = 1200 - MARGIN.TOP - MARGIN.BOTTOM
 sizeDivisor = 900, nodePadding = 2.5;
 
 d3.select('h1').text(function(){
-  return ('Amount of Gas Emitted Per Hour on '+ date)
+  return ('Hourly Gas Emission for '+ date_title)
 });
+
+d3.select('#loading').text(function(){
+    return ('Loading hourly gas data for '+ date_title + "...")
+});
+
+d3.select('#loading').attr("font-size", 15);
 
 window.onload = function () {
   const station = localStorage.getItem("view1_station")
@@ -20,11 +27,11 @@ window.onload = function () {
   if (station && region) {
       displayRegion.textContent = "Region [" + region.slice(5) + "]"
       displayStation.textContent = "Air Station [" + station + "]"
-      draw(region, station)
+      // draw(region, station)
   } else if (!region && station) {
       displayRegion.textContent = getKeyByValue(BC, station)
       displayStation.textContent = station
-      draw(getKeyByValue(BC, station), station)
+      // draw(getKeyByValue(BC, station), station)
   }
 }
 
@@ -70,6 +77,7 @@ d3.csv('data/view3.csv').
       }
 
     })
+    d3.select('#loading').style("display", "none");
     data.forEach(d => {
 
       d.ROUNDED_VALUE = Number(d.ROUNDED_VALUE);
