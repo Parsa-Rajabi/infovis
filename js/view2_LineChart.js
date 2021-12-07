@@ -184,6 +184,7 @@ function chart(data, name, gasName, colour) {
         console.log(passDateToView3(d.date))
         // store the date selected by the user in localStorage to be used in view 3
         localStorage.setItem("view2_date", passDateToView3(d.date));
+        localStorage.setItem("view2_date_title", formatDate(d.date));
         // redirect user to view 3
         window.location.href = "view3.html";
 
