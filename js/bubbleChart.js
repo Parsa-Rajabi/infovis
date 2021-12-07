@@ -2,9 +2,7 @@ const date = localStorage.getItem("view2_date");
 const date_title = localStorage.getItem("view2_date_title");
 const station = localStorage.getItem("view1_station");
 const region = localStorage.getItem("view1_region");
-// console.log(date,'FROM VIEW 3');
-// console.log(station,'FROM VIEW 3');
-// console.log(region,'FROM VIEW 3');
+
 MARGIN = { LEFT: 60, RIGHT: 30, TOP: 280, BOTTOM: 100 };
 const width = 1200 - MARGIN.RIGHT - MARGIN.LEFT
 const height = 1200 - MARGIN.TOP - MARGIN.BOTTOM
@@ -37,7 +35,6 @@ window.onload = function () {
 
 var svg = d3.select(".bubble")
   .append("svg")
-  // .attr("viewBox", [10, 200, width, height])
   .attr("width", width)
   .attr("height", height);
 
@@ -45,17 +42,9 @@ var color = d3.scaleOrdinal()
   .domain(['CO', 'NO2', 'O3', 'NOx', 'SO2', 'NO'])
   .range(["#FFA500", "#228B22", "#808080", '#000000', '#852415', '#800080']);
 
-//   var cxx = d3.scaleOrdinal().domain(['CO','NO2','O3','NOx','SO2','NO']).range([50,200,300,400,500,600])
-
-// var simulation = d3.forceSimulation()
-//       .force("x", d3.forceX().strength(.1).x(width * .5))
-//       .force("y", d3.forceY().strength(.1).y(height * .5))
-//       .force("center", d3.forceCenter().x(width * .5).y(height * .5))
-//       .force("charge", d3.forceManyBody().strength(-15));
-
 var simulation = d3.forceSimulation()
-  .force("center", d3.forceCenter().x(width / 2).y(height / 2)) // Attraction to the center of the svg area
-  .force("charge", d3.forceManyBody().strength(1)) // Nodes are attracted one each other of value is > 0
+  .force("center", d3.forceCenter().x(width / 2).y(height / 2)) 
+  .force("charge", d3.forceManyBody().strength(1)) 
   .force("collide", d3.forceCollide().strength(.1).radius(30).iterations(1));
 
 
@@ -85,7 +74,6 @@ d3.csv('data/view3.csv').
     })
 
     x.domain(d3.extent(data, d => d.ROUNDED_VALUE));
-    // const x= d3.scaleLinear().domain([0,d3.max(data,d=>d.ROUNDED_VALUE)]).range([0,150]);
 
     data = data.sort(function (a, b) { return b.size - a.size; });
 
