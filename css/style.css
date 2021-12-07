@@ -81,15 +81,18 @@ svg {
 div.tooltip {
     position: absolute;
     text-align: left;
-    width: 100px;
-    height: 100px;
-    padding: 2px;
-    font: 12px Helvetica, sans-serif;
-    color: white;
-    background: rgb(44, 44, 61);
-    border: 0px;
+    font-weight: bold;
+    width: 150px;
+    height: 40px;
     border-radius: 5px;
     pointer-events: none;
+    background: #fff;
+    box-shadow: 3px 3px 3px 0px rgb(92 92 92 / 0.5);
+    border: 1px solid #ddd;
+    font-size: 11px;
+    padding: 5px;
+    color: #333;
+    font-family: 'Open Sans', sans-serif;
 }
 
 
@@ -97,6 +100,12 @@ body {
     font-size: 14px;
     font-family: 'Lato', 'sans-serif';
     /* background-color: rgb(44,44,61); */
+}
+
+h1,h2,h3{
+    font-family: 'Lato', 'sans-serif';
+    text-align: center;
+    margin-top: 1px;
 }
 
 
