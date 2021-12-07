@@ -5,7 +5,6 @@ class SunBurst {
       parentElement: _config.parentElement,
       containerWidth: _config.containerWidth || 900,
       containerHeight: _config.containerHeight || 900,
-      // radius = _config.radius,
     }
     this.data = _data;
 
@@ -26,7 +25,6 @@ class SunBurst {
       "07 - Omineca-Peace": ["Bessborough 237 Road", "Farmington Community Hall", "Farmington Community Hall Met_1", "Farmington Community Hall Met_15", "Farmington Community Hall Met_60", "Fort St John 85th Avenue_1", "Fort St John 85th Avenue_60", "Fort St John Key Learning Centre", "Fort St John North Camp C_1", "Fort St John North Camp C_60", "Fort St John North Camp C_Met_60", "Fort St John Old Fort_1", "Fort St John Old Fort_60", "Hudsons Hope Dudley Drive", "Peace Valley Attachie Flat Upper Terrace_1", "Peace Valley Attachie Flat Upper Terrace_60", "Peace Valley Attachie Flat Upper Terrace_Met_60", "PG Marsulex Met_1", "PG Marsulex Met_15", "PG Marsulex Met_60", "Pine River Gas Plant_60", "Pine River Hasler_60", "Prince George Exploration Place", "Prince George Exploration Place_1", "Prince George Exploration Place_60", "Prince George Jail", "Prince George Lakewood", "Prince George Marsulex Acid Plant", "Prince George Plaza 400", "Prince George Plaza 400 Met_15", "Prince George Plaza 400 Met_60", "Prince George Pulp Met_15", "Prince George Pulp Met_60", "Taylor South Hill", "Taylor Townsite", "Valemount", "Valemount Met_15", "Valemount Met_60", "Vanderhoof Courthouse", "Vanderhoof Courthouse Met_15", "Vanderhoof Courthouse Met_60"]
     }
 
-    // const canvas = d3.select(vis.config.parentElement).node().appendChild(svg);
     vis.tooltip = d3.select('body')
       .append("div").attr("class", "tooltip").style("opacity", 0);
 
@@ -37,18 +35,13 @@ class SunBurst {
     vis.height = 900
     vis.radius = vis.config.containerWidth / 11
 
-
-
     vis.svg = d3.create("svg")
       .attr("viewBox", [10, 250, vis.width, vis.height])
-      // .attr('width', vis.width)
-      // .attr('height', vis.height)
       .style("font", "5px sans-serif");
 
     vis.g = vis.svg.append("g")
       .attr("transform", `translate(${vis.width / 2},${vis.width / 2})`);
-
-
+    
     vis.updateVis()
 
   }
@@ -59,11 +52,6 @@ class SunBurst {
     vis.boot = d3.stratify().id(d => d.children).parentId(d => d.name)(vis.data);
     vis.root = partition(vis.boot);
     vis.color = d3.scaleOrdinal(d3.quantize(d3.interpolateViridis, vis.root.children.length + 1))
-
-    //   vis.color = d3.scaleLinear()
-    // .domain([0,d3.max(vis.root,d=>d.value)])
-    // .range(['red', 'darkred']);
-
     vis.root.each(d => d.current = d);
 
     vis.arc = d3.arc()
@@ -81,7 +69,6 @@ class SunBurst {
       .attr("fill", d => {
         while (d.depth > 1) d = d.parent;
 
-        // return vis.color(d.data.data.children);
         return vis.color(d.data.children);
       })
       .attr("fill-opacity", d => arcVisible(d.current) ? (d.children ? 0.6 : 0.4) : 0)
@@ -96,14 +83,11 @@ class SunBurst {
         ) {
 
           vis.tooltip.html("<p>Region: " + p.data.id + "</p>").style("left", event.pageX + "px").style("top", event.pageY + "px");
-          // vis.tooltip.html("<p>Region " + p.data.value + "</p>").style("left", event.pageX + "px").style("top", event.pageY + "px");
         } else {
 
           vis.tooltip.html("<p>Station: " + (p.data.id) + "</p>").style("left", event.pageX + "px").style("top", event.pageY + "px");
-          // vis.tooltip.html("<p>Station: " + p.data.value + "</p>").style("left", event.pageX + "px").style("top", event.pageY + "px");
         }
 
-        // vis.tooltip.html("<p>Name: " + i.data.id + "</p>").style("left", event.pageX + "px").style("top", event.pageY + "px");
       }).on('mouseout', function (event, i) {
         vis.tooltip.transition().duration(200).style("opacity", 0);
 
@@ -112,11 +96,6 @@ class SunBurst {
     vis.path.filter(d => d.data.data.children)
       .style("cursor", "pointer")
       .on("click", clicked);
-
-    // path.append("title")
-    // .text(d => `${d.ancestors().map(d => d.data.data.children).reverse().join("/")}\n${format(d.value)}`)
-
-
 
     vis.label = vis.g.append("g")
       .attr("pointer-events", "none")
@@ -172,12 +151,9 @@ class SunBurst {
         window.location.href = "view2.html";
       }
 
-
-
     }
 
     function transitions(event, p) {
-
 
       vis.parent.datum(p.parent || vis.root);
 
@@ -202,8 +178,6 @@ class SunBurst {
         })
         .attr("fill-opacity", d => arcVisible(d.target) ? (d.children ? 0.6 : 0.4) : 0)
         .attrTween("d", d => () => vis.arc(d.current));
-
-
 
       vis.label.filter(function (d) {
         return +this.getAttribute("fill-opacity") || labelVisible(d.target);
@@ -240,21 +214,14 @@ class SunBurst {
         .size([2 * Math.PI, root.height + 1])
         (root);
     }
-
-    // return vis.svg.node();
     console.log(vis.root);
     vis.canvas = d3.select(vis.config.parentElement).node().appendChild(vis.svg.node());
 
-
-
   }
-
-
 
   renderVis() {
     let vis = this;
 
   }
-
 
 }
