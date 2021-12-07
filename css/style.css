@@ -39,7 +39,6 @@ svg {
     font-weight: normal;
 }
 
-
 .missingTextContainer {
     text-align: center;
 }
@@ -67,7 +66,6 @@ svg {
 .btn:hover {
     transform: translateY(-2px);
 }
-
 
 .datePickerText {
     font-weight: bold;
@@ -112,7 +110,6 @@ div.tooltipbubble {
     font-family: 'Open Sans', sans-serif;
 }
 
-
 body {
     font-size: 14px;
     font-family: 'Lato', 'sans-serif';
@@ -126,7 +123,6 @@ h1,h2,h3{
     margin: 0px;
     padding: 0px;
 }
-
 
 .flex-content {
     margin-top: 10px;
