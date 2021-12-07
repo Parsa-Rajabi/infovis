@@ -13,8 +13,8 @@ window.onload = function () {
     const region = localStorage.getItem("view1_region")
 
     if (station && region) {
-        displayRegion.textContent = region
-        displayStation.textContent = station
+        displayRegion.textContent = "Region [" + region.slice(5) + "]"
+        displayStation.textContent = "Air Station [" + station + "]"
         draw(region, station)
     } else if (!region && station) {
         displayRegion.textContent = getKeyByValue(BC, station)
@@ -58,7 +58,7 @@ const TIME = "TIME",
 function missingData(chartID, gas, colour) {
     console.log("Not enough data for " + gas)
     document.getElementById(chartID).style.display = "none"
-    document.getElementById(chartID + "-missingText").textContent = "This air station does not have any data for " + gas
+    document.getElementById(chartID + "-missingText").textContent = "This air station is missing data for " + gas
     document.getElementById(chartID + "-missingText").style.color = colour
 }
 
@@ -154,7 +154,7 @@ function draw(view1_region, view1_station) {
         })
         d.columns = [DATE.toLowerCase(), NO]
         if (d.length > 0) {
-            chart(d, "chart4",NO_full, purple)
+            chart(d, "chart4", NO_full, purple)
         } else {
             missingData("chart4", NO_full, red)
         }
