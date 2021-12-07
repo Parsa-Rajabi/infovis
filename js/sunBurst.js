@@ -1,6 +1,6 @@
 // Copyright 2021 Observable, Inc.
 // Released under the ISC license.
-// https://observablehq.com/@d3/sunburst
+// Partial Credits to:https://observablehq.com/@d3/sunburst
 class SunBurst {
 
   constructor(_config, _data) {
@@ -137,7 +137,6 @@ class SunBurst {
         passData(event, p);
       }
 
-
     }
 
     function passData(event, p) {
@@ -168,7 +167,6 @@ class SunBurst {
       });
 
       vis.t = vis.g.transition().duration(750);
-
 
       vis.path.transition(vis.t)
         .tween("data", d => {
