@@ -95,6 +95,23 @@ div.tooltip {
     font-family: 'Open Sans', sans-serif;
 }
 
+div.tooltipbubble {
+    position: absolute;
+    text-align: left;
+    font-weight: bold;
+    width: 150px;
+    height: 80px;
+    border-radius: 5px;
+    pointer-events: none;
+    background: #fff;
+    box-shadow: 3px 3px 3px 0px rgb(92 92 92 / 0.5);
+    border: 1px solid #ddd;
+    font-size: 11px;
+    padding: 5px;
+    color: #333;
+    font-family: 'Open Sans', sans-serif;
+}
+
 
 body {
     font-size: 14px;
@@ -106,6 +123,8 @@ h1,h2,h3{
     font-family: 'Lato', 'sans-serif';
     text-align: center;
     margin-top: 1px;
+    margin: 0px;
+    padding: 0px;
 }
 
 
