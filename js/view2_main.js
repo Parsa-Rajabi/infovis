@@ -1,3 +1,4 @@
+// default BC object with regions as keys and air stations within each region as array values
 const BC = {
     "01 - Vancouver Island": ["Colwood City Hall", "Courtenay Elementary School", "Crofton Elementary", "Crofton Substation", "Duncan College Street", "Duncan Deykin Avenue", "Elk Falls Dogwood", "Harmac Cedar Woobank", "Harmac Nanaimo Dukepoint", "Harmac Pacific Met_15", "Harmac Pacific Met_60", "Nanaimo Labieux Road", "Port Alberni Elementary", "Victoria Topaz", "Victoria Topaz Met_15", "Victoria Topaz Met_60"],
     "02 - Lower Mainland": ["Abbotsford A Columbia Street", "Abbotsford A Columbia Street Met", "Abbotsford Central", "Agassiz Municipal Hall", "Agassiz Municipal Hall Met", "Burnaby Burmount", "Burnaby Kensington Park", "Burnaby Mountain", "Burnaby North Eton", "Burnaby South", "Chilliwack Airport", "Coquitlam Douglas College", "CSpice Met_01", "CSpice_Met_60", "Hope Airport", "Hope Othello Compressor Station_15", "Hope Othello Compressor Station_60", "Horseshoe Bay", "Langdale Elementary", "Langley Central", "Maple Ridge Golden Ears School", "Mission School Works Yard", "Mission School Works Yard Met", "New Westminster Sapperton Park", "New Westminster Sapperton Park Met", "North Burnaby Capitol Hill", "North Delta", "North Vancouver Mahon Park", "North Vancouver Second Narrows", "Pitt Meadows Meadowlands School", "Port Mellon_15", "Port Mellon_60", "Port Moody Rocky Point Park", "Port Moody Rocky Point Park Met", "Powell River James Thomson School", "Powell River Pacifica Met_15", "Powell River Pacifica Met_60", "Powell River Townsite Helipad", "Richmond South", "Squamish Elementary", "Squamish Elementary_15", "Squamish Elementary_60", "Surrey East", "Tsawwassen", "Vancouver Clark Drive", "Vancouver Clark Drive Met", "Vancouver International Airport #2", "Vancouver Robson Square", "Whistler Meadow Park"],
@@ -9,9 +10,11 @@ const BC = {
 }
 
 window.onload = function () {
+    // get data from previous view stored in localStorage
     const station = localStorage.getItem("view1_station")
     const region = localStorage.getItem("view1_region")
 
+    // depending on what data was retrieved, set display region and station to their values and start drawing
     if (station && region) {
         displayRegion.textContent = "Region [" + region.slice(5) + "]"
         displayStation.textContent = "Air Station [" + station + "]"
@@ -23,10 +26,12 @@ window.onload = function () {
     }
 }
 
+// returns the key of a object based on the given value within the array
 function getKeyByValue(object, value) {
     return Object.keys(object).find(k => object[k].includes(value))
 }
 
+// local variables
 const TIME = "TIME",
     REGION = "REGION",
     STATION_NAME_FULL = "STATION_NAME_FULL",
@@ -55,6 +60,7 @@ const TIME = "TIME",
     purple = "#800080";
 
 
+// function used to display error when data is missing for a specific gas
 function missingData(chartID, gas, colour) {
     console.log("Not enough data for " + gas)
     document.getElementById(chartID).style.display = "none"
@@ -62,15 +68,19 @@ function missingData(chartID, gas, colour) {
     document.getElementById(chartID + "-missingText").style.color = colour
 }
 
+// opens all the CSV files and filters data, calls line chart based on filtered data
 function draw(view1_region, view1_station) {
     console.log("selected region " + view1_region)
     console.log("selected station " + view1_station)
 
     d3.csv("data/1_CO_12.csv", function (d) {
+        // filter data
         if (d[REGION] === view1_region && d[STATION_NAME].toLowerCase() === view1_station.toLowerCase()) {
             return d
         }
     }).then(d => {
+
+        // delete extra columns
         d.forEach(d => {
             delete d[DATE_PST]
             delete d[CO_ppm]
@@ -82,6 +92,8 @@ function draw(view1_region, view1_station) {
             delete d[DATE];
         })
         d.columns = [DATE.toLowerCase(), CO]
+
+        // only draw the chart if there is data
         if (d.length > 0) {
             chart(d, "chart1", CO_full, orange)
             console.log("Loading CO")
@@ -92,12 +104,15 @@ function draw(view1_region, view1_station) {
     })
 
     d3.csv("data/2_O3_12.csv", function (d) {
+        // filter the data
         if (d[REGION] === view1_region && d[STATION_NAME].toLowerCase() === view1_station.toLowerCase()) {
             return d
         }
     }).then(d => {
+        // only draw the data if data exits
         if (d.length > 0) {
             d.forEach(d => {
+                // delete extra columns
                 delete d[DATE_PST]
                 delete d[STATION_NAME_FULL]
                 delete d[STATION_NAME]
@@ -116,10 +131,12 @@ function draw(view1_region, view1_station) {
     })
 
     d3.csv("data/3_SO2_12.csv", function (d) {
+        // filter the data
         if (d[REGION] === view1_region && d[STATION_NAME].toLowerCase() === view1_station.toLowerCase()) {
             return d
         }
     }).then(d => {
+        // delete extra columns
         d.forEach(d => {
             delete d[DATE_PST]
             delete d[STATION_NAME_FULL]
@@ -139,10 +156,12 @@ function draw(view1_region, view1_station) {
     })
 
     d3.csv("data/4_NO_12.csv", function (d) {
+        // filter data
         if (d[REGION] === view1_region && d[STATION_NAME].toLowerCase() === view1_station.toLowerCase()) {
             return d
         }
     }).then(d => {
+        // delete extra columns
         d.forEach(d => {
             delete d[DATE_PST]
             delete d[STATION_NAME_FULL]
@@ -153,6 +172,7 @@ function draw(view1_region, view1_station) {
             delete d[DATE];
         })
         d.columns = [DATE.toLowerCase(), NO]
+        // only draw chart if there is data
         if (d.length > 0) {
             chart(d, "chart4", NO_full, purple)
         } else {
@@ -161,10 +181,12 @@ function draw(view1_region, view1_station) {
     })
 
     d3.csv("data/5_NO2.csv", function (d) {
+        // filter data
         if (d[REGION] === view1_region && d[STATION_NAME].toLowerCase() === view1_station.toLowerCase()) {
             return d
         }
     }).then(d => {
+        // delete extra columns
         d.forEach(d => {
             delete d[DATE_PST]
             delete d[STATION_NAME_FULL]
@@ -175,6 +197,7 @@ function draw(view1_region, view1_station) {
             delete d[DATE];
         })
         d.columns = [DATE.toLowerCase(), NO2]
+        // only draw chart if there is data
         if (d.length > 0) {
             chart(d, "chart5", NO2_full, green)
             console.log("Loading NO2")
@@ -198,6 +221,7 @@ function draw(view1_region, view1_station) {
             delete d[DATE];
         })
         d.columns = [DATE.toLowerCase(), NOX]
+        // only draw chart if there is data
         if (d.length > 0) {
             chart(d, "chart6", NOX_full, black)
             console.log("Loading NOx")

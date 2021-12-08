@@ -1,4 +1,24 @@
+/*
+References and resources used:
+
+https://observablehq.com/@d3/learn-d3-interaction
+https://medium.com/@sahilaug/line-graphs-using-d3-drawing-the-axes-8ffc0076a8be
+https://medium.com/@sahilaug/line-graphs-using-d3-plotting-the-line-306b9cabf15e#.e30ytr7fy
+https://www.d3-graph-gallery.com/graph/custom_axis.html
+https://www.d3-graph-gallery.com/graph/line_basic.html
+https://bl.ocks.org/d3noob/e5daff57a04c2639125e
+https://bl.ocks.org/mbostock/3883245
+
+*/
 function chart(data, name, gasName, colour) {
+
+    // create an SVG with a unique id
+    var svgElement = d3.select("#" + name)
+
+    // set margin, width and height
+    var margin = {top: 25, right: 35, bottom: 25, left: 60}
+    var width = +window.innerWidth - margin.left - margin.right
+    var height = +svgElement.attr("height") - margin.top - margin.bottom;
 
     // parse time based on date format
     var parseTime = d3.timeParse("%Y-%m-%d"),
@@ -11,12 +31,6 @@ function chart(data, name, gasName, colour) {
         d.date = parseTime(d.date);
         return d;
     })
-
-    // create an SVG with a unique id, set margin, width and height
-    var svgElement = d3.select("#" + name),
-        margin = {top: 25, right: 35, bottom: 25, left: 60},
-        width = +window.innerWidth - margin.left - margin.right,
-        height = +svgElement.attr("height") - margin.top - margin.bottom;
 
     // create x axis based on width, set domain to date from data
     var xAxis = d3.scaleTime()
@@ -49,7 +63,7 @@ function chart(data, name, gasName, colour) {
 
     // text label for the x axis
     svgElement.append("text")
-        .attr("transform", "translate(" + (width/2) + " ," + (height + margin.top - 17) + ")")
+        .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.top - 17) + ")")
         .attr("font-size", 11)
         .style("text-anchor", "middle")
         .text("Date (Jan 2019 - Dec 2020)");
@@ -63,8 +77,8 @@ function chart(data, name, gasName, colour) {
 
     // text label for the chart title, set the text and colour based on the parameters
     svgElement.append("text")
-        .attr("x", width/10)
-        .attr("y", -height/2 + margin.top + margin.bottom + 100)
+        .attr("x", width / 10)
+        .attr("y", -height / 2 + margin.top + margin.bottom + 100)
         .attr("text-anchor", "middle")
         .style("font-size", "16px")
         .style("fill", colour)
@@ -76,7 +90,8 @@ function chart(data, name, gasName, colour) {
         .style("display", "none");
 
     // draw the date picker line
-    datePickerBase.append("line").attr("class", "datePicker")
+    datePickerBase.append("line")
+        .attr("class", "datePicker")
         .style("stroke", "red")
         .attr("stroke-width", 2)
         .style("opacity", 0.5)
@@ -84,7 +99,8 @@ function chart(data, name, gasName, colour) {
         .attr("y2", 0);
 
     // draw the date picker date (text)
-    datePickerBase.append("text").attr("class", "datePickerText")
+    datePickerBase.append("text")
+        .attr("class", "datePickerText")
         .attr("text-anchor", "middle")
         .attr("font-size", 15);
 
@@ -120,12 +136,10 @@ function chart(data, name, gasName, colour) {
     ]);
 
     // set the y-axis to be on the left and draw line increments
-    svgElement.selectAll(".y-axis").transition()
-        .call(d3.axisLeft(yAxis).tickSize(-width + margin.right + margin.left))
+    svgElement.selectAll(".y-axis").call(d3.axisLeft(yAxis).tickSize(-width + margin.right + margin.left))
 
     // add mapped gas data to gasData variable
-    var gasData = svgElement.selectAll(".gasMapped")
-        .data(gasMapped);
+    var gasData = svgElement.selectAll(".gasMapped").data(gasMapped);
 
     // draw the lien based on the mapped gas data, set the colour to
     gasData.enter().insert("g", ".hover").append("path")
@@ -146,6 +160,7 @@ function chart(data, name, gasName, colour) {
         // show the dataPickerBase by removing the display none
         datePickerBase.style("display", null);
     }
+
     // handle when mouse leaves the element
     function handleMouseOut() {
         // hide the dataPickerBase by setting display to none
@@ -162,8 +177,7 @@ function chart(data, name, gasName, colour) {
             d = x0 - d0.date > d1.date - x0 ? d1 : d0;
 
         // show the line on DataPicker from base on the chart to the top (height)
-        datePickerBase.select(".datePicker")
-            .attr("transform", "translate(" + xAxis(d.date) + "," + height + ")");
+        datePickerBase.select(".datePicker").attr("transform", "translate(" + xAxis(d.date) + "," + height + ")");
 
         // set the text on dataPicker to be the date
         datePickerBase.select(".datePickerText")
