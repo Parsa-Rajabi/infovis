@@ -70,10 +70,6 @@ svg {
 .datePickerText {
     font-weight: bold;
     fill: red;
-    text-shadow: -2px -2px 0 #fff,
-    2px -2px 0 #fff,
-    -2px 2px 0 #fff,
-    2px 2px 0 #fff;
 }
 
 div.tooltip {
@@ -113,10 +109,9 @@ div.tooltipbubble {
 body {
     font-size: 14px;
     font-family: 'Lato', 'sans-serif';
-    /* background-color: rgb(44,44,61); */
 }
 
-h1,h2,h3{
+h1, h2, h3 {
     font-family: 'Lato', 'sans-serif';
     text-align: center;
     margin-top: 1px;
@@ -127,5 +122,4 @@ h1,h2,h3{
 .flex-content {
     margin-top: 10px;
     margin-left: 15px;
-    /* outline: 1px solid #ccc; */
 }
